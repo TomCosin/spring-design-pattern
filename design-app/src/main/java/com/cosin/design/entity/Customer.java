@@ -2,6 +2,7 @@ package com.cosin.design.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 public class Customer {
@@ -10,6 +11,8 @@ public class Customer {
     private String id;
 
     private String name;
+
+    private BigDecimal balance;
 
     public String getId() {
         return id;
@@ -25,5 +28,13 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 }

@@ -5,7 +5,12 @@ import com.cosin.design.entity.Customer;
 import com.cosin.design.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -22,10 +27,13 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     @Transactional
-    public Customer updateCustomer(String c) {
-        Customer customer = customerRepository.findCustomerByName(c);
-        customer.setName("修改了");
+    public Customer updateCustomer(String id, BigDecimal c) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(id);
+        Customer customer = optionalCustomer.orElseThrow(NullPointerException::new);
+        customer.setBalance(customer.getBalance().add(c));
+        BigDecimal balance1 = customerRepository.findById(id).orElseThrow(NullPointerException::new).getBalance();
         Customer save = customerRepository.save(customer);
+        BigDecimal balance = customerRepository.findById(id).orElseThrow(NullPointerException::new).getBalance();
         return save;
     }
 }
