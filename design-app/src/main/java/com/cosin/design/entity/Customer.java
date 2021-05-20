@@ -2,6 +2,7 @@ package com.cosin.design.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
 import java.math.BigDecimal;
 
 @Entity
