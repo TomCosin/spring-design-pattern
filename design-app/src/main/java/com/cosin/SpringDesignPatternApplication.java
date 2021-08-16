@@ -10,10 +10,6 @@ import java.util.concurrent.locks.ReentrantLock;
 public class SpringDesignPatternApplication {
 
 	public static void main(String[] args) {
-		AtomicInteger o = new AtomicInteger();
-		o.addAndGet(1);
-		ReentrantLock reentrantLock = new ReentrantLock();
-		reentrantLock.lock();
 		SpringApplication.run(SpringDesignPatternApplication.class, args);
 	}
 

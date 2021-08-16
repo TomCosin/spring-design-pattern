@@ -1,15 +1,14 @@
 package com.cosin;
 
-import com.cosin.design.dto.ChargeRequest;
-import com.cosin.design.dto.ChargeResult;
 import com.cosin.design.protocol.dto.ProtocolDto;
 import com.cosin.design.protocol.execute.ProtocolServiceFactory;
-import com.cosin.design.protocol.strategy.ProtocolStrategyHandler;
 import com.cosin.design.protocol.strategy.StrategyConstant;
+import com.cosin.design.service.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,19 +19,20 @@ class SpringDesignPatternApplicationTests {
     @Autowired
     private ProtocolServiceFactory protocolServiceFactory;
 
+    @Autowired
+    private TransactionService transactionService;
+
     @Test
     void contextLoads() {
-        ProtocolDto protocolDto = new ProtocolDto();
-        extracted(protocolDto);
-        ProtocolStrategyHandler<ChargeRequest, ChargeResult> handler = protocolServiceFactory.instanceProtocolExecutor(protocolDto, StrategyConstant.REGISTER);
-        handler.handle(new ChargeRequest());
+        transactionService.updateCustomer("007",new BigDecimal("34"));
     }
 
     private void extracted(ProtocolDto protocolDto) {
         HashMap<String, List<String>> map = new HashMap<>();
         ArrayList<String> strings = new ArrayList<>();
         strings.add("center");
-        map.put(StrategyConstant.REGISTER, strings);
+        strings.add("anran");
+        map.put(StrategyConstant.RECHARGE, strings);
         protocolDto.setStrategyMap(map);
     }
 

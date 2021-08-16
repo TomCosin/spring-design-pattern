@@ -3,6 +3,7 @@ package com.cosin.design.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.Version;
 import java.math.BigDecimal;
 
 @Entity
@@ -14,6 +15,17 @@ public class Customer {
     private String name;
 
     private BigDecimal balance;
+
+    @Version
+    private int version;
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 
     public String getId() {
         return id;

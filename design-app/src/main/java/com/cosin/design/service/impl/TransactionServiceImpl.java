@@ -44,43 +44,12 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public Customer updateCustomer(String id, BigDecimal c) {
-        System.out.println("-----进来了------");
-        ex();
-//        try {
-//            ex();
-//        }catch (Exception ex){
-//            System.out.println("--------out catch---------");
-//        }finally {
-//            System.out.println("--------out finally---------");
-//        }
-//        Optional<Customer> optionalCustomer = customerRepository.findById(id);
-//
-//        Customer customer = optionalCustomer.orElseThrow(NullPointerException::new);
-//        customer.setBalance(customer.getBalance().add(c));
-//        customerRepository.save(customer);
-//
-//
-//        BigDecimal balance = customerRepository.getCust(id).orElseThrow(NullPointerException::new).getBalance();
-//        System.out.println("完成了");
+        Optional<Customer> customer = customerRepository.findById(id);
+        customer.ifPresent(a -> {
+            a.setBalance(c);
+            customerRepository.save(a);
+        });
         return null;
-    }
-
-    public static void main(String[] args) {
-        ex();
-    }
-
-    public static void ex(){
-        try {
-            int i = 1/0;
-        }catch (Exception ex){
-            System.out.println("--------inner catch---------");
-            throw ex;
-        }finally {
-            System.out.println("--------inner finally---------");
-            throw new NullPointerException();
-        }
-
-
     }
 
 
